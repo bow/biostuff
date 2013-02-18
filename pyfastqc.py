@@ -17,8 +17,10 @@ Tested with FastQC 0.9.5 output.
 
 """
 
+import os
 
-def load(fname, mode='r', **kwargs):
+
+def load_file(fname, mode='r', **kwargs):
     """Given a path to a FastQC data file or an open file object pointing to it,
     return a `FastQC` object.
     """
@@ -27,6 +29,13 @@ def load(fname, mode='r', **kwargs):
             return FastQC(fp)
     else:
         return FastQC(fname)
+
+
+def load_from_dir(dirname, data_fname='fastqc_data.txt', mode='r', **kwargs):
+    """Given a path to a FastQC results directory, return a `FastQC` object."""
+    assert os.path.exists(dirname), "Directory %r does not exist" % dirname
+    fqc_path = os.path.join(os.walk(dirname).next()[1][0], data_fname)
+    return load_file(fqc_path, mode, **kwargs)
 
 
 class FastQCModule(object):
@@ -116,7 +125,6 @@ class FastQC(object):
         self._modules = {}
 
         line = fp.readline()
-
         while True:
 
             tokens = line.strip().split('\t')
