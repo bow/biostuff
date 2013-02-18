@@ -114,9 +114,6 @@ class FastQC(object):
         # get file name
         self.fname = fp.name
         self._modules = {}
-        # default all module values to None
-        for attr in ('_basic_statistics', ):
-            setattr(self, attr, None)
 
         line = fp.readline()
 
