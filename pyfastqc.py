@@ -97,6 +97,10 @@ class FastQCModule(object):
             cols = line.strip().split('\t')
             data.append(cols)
 
+        # optional processing for different modules
+        if self.name == 'Basic Statistics':
+            data = {k: v for k, v in data}
+
         return data
 
 
