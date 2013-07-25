@@ -6,17 +6,21 @@ Scripts and modules for working with various bio-related data
 
 ### Contents
 
-1. `fastqc/`
-
-    1. `pyfastqc`: Python module for parsing FastQC results
-
-2. `bam/`
+1. `bam/`
 
     1. `bam_split_by_ref.py`: script for splitting BAM file based on reference
 
-3. `bed/`
+2. `bed/`
 
-    1. `bed_squish.py`: split for removing overlapping regions in a BED file
+    1. `bed_squish.py`: script for removing overlapping regions in a BED file
+
+3. `fastqc/`
+
+    1. `pyfastqc`: Python module for parsing FastQC results
+
+4. `ucsc/`
+
+    1. `get_ucsc_ensembl_bed.sh`: Shell script for downloading Ensembl transcripts in UCSC as a BED file
 
 
 ### License
