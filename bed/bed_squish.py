@@ -21,6 +21,12 @@ MIT License <http://opensource.org/licenses/MIT>
 
 """
 
+RELEASE = False
+__version_info__ = ('0', '1', )
+__version__ = '.'.join(__version_info__)
+__version__ += '-dev' if not RELEASE else ''
+
+
 import argparse
 import os
 
@@ -207,6 +213,8 @@ if __name__ == '__main__':
 
     parser.add_argument('input', type=str, help='Path to input BED file')
     parser.add_argument('output', type=str, help='Path to output BED file')
+    parser.add_argument('--version', action='version', version='%(prog)s ' +
+            __version__)
 
     args = parser.parse_args()
 
