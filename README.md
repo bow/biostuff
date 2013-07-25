@@ -1,18 +1,30 @@
-========
 BIOSTUFF
 ========
 
----------------------------------------------------------------
-Collection of scripts for working with various bio-related data
----------------------------------------------------------------
+Scripts and modules for working with various bio-related data
+-------------------------------------------------------------
+
+### Contents
+
+1. `fastqc/`
+
+    1. `pyfastqc`: Python module for parsing FastQC results
+
+2. `bam/`
+
+    1. `bam_split_by_ref.py`: script for splitting BAM file based on reference
+
+3. `bed/`
+
+    1. `bed_squish.py`: split for removing overlapping regions in a BED file
 
 
-License
-=======
+### License
 
-biostuff is licensed under the MIT License.
+All scripts and libraries in biostuff is licensed under the MIT License,
+unless otherwise noted in the specific script / library.
 
-Copyright (c) 2011 by Wibowo Arindrarto <bow@bow.web.id>
+Copyright (c) 2013 by Wibowo Arindrarto <<bow@bow.web.id>>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
