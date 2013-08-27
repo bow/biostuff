@@ -14,13 +14,17 @@ Scripts and modules for working with various bio-related data
 
     1. `bed_squish.py`: script for removing overlapping regions in a BED file
 
-3. `fastqc/`
+3. `fasta/`
 
-    1. `pyfastqc`: Python module for parsing FastQC results
+    1. `fa_build_deepsage_lib.py`: script for building library of deepSAGE tags
 
-4. `ucsc/`
+4. `fastqc/`
 
-    1. `get_ucsc_ensembl_bed.sh`: Shell script for downloading Ensembl transcripts in UCSC as a BED file
+    1. `pyfastqc.py`: module for parsing FastQC results
+
+5. `ucsc/`
+
+    1. `get_ucsc_ensembl_bed.sh`: script for downloading Ensembl transcripts in UCSC as a BED file
 
 
 ### License
