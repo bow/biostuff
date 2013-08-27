@@ -84,10 +84,10 @@ class BEDCoord(object):
 def squish_track_records(chrom_recs):
     """Given an iterator for `track` records, yield squished `track` features.
 
-    :param chrom_feats: iterator returning `track` records for one chromosome
-    :type chrom_feats: iterator
-    :returns: (generator) single `track` records
-    :rtype: `track.pyrow.SuperRow`
+    :param chrom_recs: iterator returning `track` records for one chromosome
+    :type chrom_recs: iterator
+    :returns: generator yielding single `track` records
+    :rtype: (yield) `track.pyrow.SuperRow`
 
     """
     # Algorithm:
