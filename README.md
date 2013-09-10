@@ -22,7 +22,11 @@ Scripts and modules for working with various bio-related data
 
     1. `pyfastqc.py`: module for parsing FastQC results
 
-5. `ucsc/`
+5. `gtf/`
+
+    1. `gtf_ucsc_geneid_fix.py`: module for replacing gene IDs of GTF files downloaded from UCSC Table Browser
+
+6. `ucsc/`
 
     1. `get_ucsc_ensembl_bed.sh`: script for downloading Ensembl transcripts in UCSC as a BED file
 
