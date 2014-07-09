@@ -18,15 +18,19 @@ Scripts and modules for working with various bio-related data
 
     1. `fa_build_deepsage_lib.py`: script for building library of deepSAGE tags
 
-4. `fastqc/`
+4. `fastq/`
+
+    1. `fq_trim_ns.py`: script for trimming Ns from FASTQ records
+
+5. `fastqc/`
 
     1. `pyfastqc.py`: module for parsing FastQC results
 
-5. `gtf/`
+6. `gtf/`
 
     1. `gtf_ucsc_geneid_fix.py`: module for replacing gene IDs of GTF files downloaded from UCSC Table Browser
 
-6. `ucsc/`
+7. `ucsc/`
 
     1. `get_ucsc_ensembl_bed.sh`: script for downloading Ensembl transcripts in UCSC as a BED file
 
