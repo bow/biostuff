@@ -34,6 +34,8 @@ Scripts and modules for working with various bio-related data
 
     1. `get_ucsc_ensembl_bed.sh`: script for downloading Ensembl transcripts in UCSC as a BED file
 
+7. `misc_scripts/` for other scripts that do not fit anywhere
+
 
 ### License
 
