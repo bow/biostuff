@@ -37,7 +37,7 @@ MIT License <http://opensource.org/licenses/MIT>
 from __future__ import print_function
 
 RELEASE = False
-__version_info__ = ('0', '1', )
+__version_info__ = ('0', '2', )
 __version__ = '.'.join(__version_info__)
 __version__ += '-dev' if not RELEASE else ''
 
