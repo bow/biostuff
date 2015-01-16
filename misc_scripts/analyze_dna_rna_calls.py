@@ -28,6 +28,8 @@ Copyright (c) 2013 LUMC Sequencing Analysis Support Core <sasc@lumc.nl>
 MIT License <http://opensource.org/licenses/MIT>
 """
 
+from __future__ import print_function
+
 RELEASE = False
 __version_info__ = ('0', '1', )
 __version__ = '.'.join(__version_info__)
@@ -149,12 +151,12 @@ class Results(object):
 
                 if all(calls[1:]):
                     self.write_overlap(gene, calls[0], calls[1:])
-                    print 'Found in DNA and all RNA:', calls[0].CHROM, \
-                            calls[0].POS, gene
+                    print('Found in DNA and all RNA:', calls[0].CHROM,
+                          calls[0].POS, gene, file=sys.stderr)
                 else:
-                    print 'Found in DNA and {0} RNA:'.format(len([x for x in
-                            calls[1:] if x])), calls[0].CHROM, calls[0].POS, \
-                            gene
+                    print('Found in DNA and {0} RNA:'.format(len([x for x in
+                          calls[1:] if x])), calls[0].CHROM, calls[0].POS,
+                          gene, file=sys.stderr)
 
                 self.write_per_rna(gene, calls[0], calls[1:])
 
