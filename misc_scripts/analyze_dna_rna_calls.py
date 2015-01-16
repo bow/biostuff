@@ -49,7 +49,7 @@ PERSAMPLE_COLS = [
     'CHROM', 'POS', 'GENE', 'REF_GT', 'RNA_ZYGOS',
     'DNA_GT', 'DNA_GQ', 'DNA_DEPTH', 'DNA_DEPTH_REF/ALT',
     'RNA_GT', 'RNA_GQ', 'RNA_DEPTH', 'RNA_DEPTH_REF/ALT',
-    'FOUND_IN'
+    'ALSO_FOUND_IN'
 ]
 # line format of per sample result files
 PERSAMPLE_LINEFMT = '{' + '}\t{'.join(PERSAMPLE_COLS) + '}'
@@ -198,17 +198,19 @@ class Results(object):
     def write_per_rna(self, gene, dna_call, *rna_calls):
         dna_call = _build_dna_call(dna_call)
 
-        found_in = []
-        for idx, rna_call in enumerate(*rna_calls):
-            if rna_call is not None and not rna_call.samples[0].is_het:
-                found_in.append(self.rna_names[idx])
-        found_in = ','.join(found_in)
-
         # iterate over each RNA call, processing ones that are not None
         for idx, rna_call in enumerate(*rna_calls):
             # skipping None calls
             if rna_call is None:
                 continue
+
+            cur_rna_name = self.rna_names[idx]
+            found_in = []
+            for idx_found, rna_call_found in enumerate(*rna_calls):
+                if rna_call_found is not None and not rna_call.samples[0].is_het \
+                    and self.rna_names[idx_found] != cur_rna_name:
+                    found_in.append(self.rna_names[idx_found])
+            found_in = ','.join(found_in)
 
             refd = int(rna_call.samples[0].data.RD)
             altd = int(rna_call.samples[0].data.AD)
@@ -226,7 +228,7 @@ class Results(object):
                 'RNA_GQ': rna_call.samples[0].data.GQ,
                 'RNA_DEPTH': refd + altd,
                 'RNA_DEPTH_REF/ALT': '{0}/{1}'.format(refd, altd),
-                'FOUND_IN': found_in,
+                'ALSO_FOUND_IN': found_in or '-',
             }
             if rna_call.samples[0].is_het:
                 cols['RNA_ZYGOS'] = 'HET'
