@@ -13,15 +13,21 @@ variant is homozygous (reference or alternative) and the DNA-seq variant is
 heterozygous.
 
 At the moment, this script is designed to work with RNA-seq variant calls from
-VarScan and DNA-seq variant calls from samtools. Each variant file must only
-have one sample calls. RNA-seq VCF file must be created using VarScan's
-mpileup2cns, which lists variant as well as reference calls. DNA-seq VCF file
-must be annotated using vcf-annotate (from the vcftools suite), otherwise
-the gene columns will all be '?'.
+VarScan and DNA-seq variant calls from samtools.
+
+In order for the script to work, these must be true:
+
+    * All DNA and VCF files have the same contig / chromosome ordering.
+    * Each variant file contains only one sample call.
+    * RNA-seq VCF file(s) were created using VarScan's mpileup2cns,
+      which outputs variant as well as reference calls.
+    * DNA-seq VCF file may be annotated using vcf-annotate
+      (from the vcftools suite), otherwise the gene columns will
+      all be '?'.
 
 Requirements:
-    * Python == 2.7.x
-    * PyVCF > 0.6.4
+    * Python == 2.7.x or 3.x
+    * PyVCF >= 0.6.7
 
 Copyright (c) 2013 Wibowo Arindrarto <w.arindrarto@lumc.nl>
 Copyright (c) 2013 LUMC Sequencing Analysis Support Core <sasc@lumc.nl>
@@ -34,7 +40,6 @@ RELEASE = False
 __version_info__ = ('0', '1', )
 __version__ = '.'.join(__version_info__)
 __version__ += '-dev' if not RELEASE else ''
-
 
 import argparse
 import os
