@@ -123,8 +123,8 @@ class Results(object):
             out_file = os.path.join(out_dir, os.path.splitext(basename)[0])
             out_file = out_file + '.results'
             outf = open(out_file, 'w')
-            outs_per_sample[basename] = open(out_file, 'w')
             outf.write('\t'.join(PERSAMPLE_COLS) + '\n')
+            outs_per_sample[basename] = outf
 
         self.rna_readers = rna_readers
         self.rna_names = rna_names
