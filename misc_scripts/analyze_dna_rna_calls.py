@@ -232,15 +232,11 @@ class Results(object):
                 cols['RNA_ZYGOS'] = 'HOM'
             # the list order are maintained, that's why we can do this
             # to fetch which file object to write to
-            rna_name = self.rna_names[idx]
-            rna_out = self.outs_per_sample[rna_name]
+            rna_out = self.outs_per_sample[cur_rna_name]
             rna_out.write(PERSAMPLE_LINEFMT.format(**cols) + '\n')
 
 
 if __name__ == '__main__':
-
-    print '\t'.join(PERSAMPLE_COLS) + '\n'
-    sys.exit(0)
 
     usage = __doc__.split('\n\n\n')
     parser = argparse.ArgumentParser(
