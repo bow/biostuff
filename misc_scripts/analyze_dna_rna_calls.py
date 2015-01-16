@@ -40,6 +40,7 @@ import sys
 from collections import namedtuple, OrderedDict
 
 import vcf
+from vcf import utils
 
 # column order of per sample results files
 PERSAMPLE_COLS = [
@@ -134,7 +135,10 @@ class Results(object):
         outov.write('\t'.join(OVERLAP_COLS) + '\n')
         self.outs_overlap = outov
 
-        for calls in self.walk_vcfs(self.dna_reader, *self.rna_readers):
+        samerec = lambda rec: (rec.CHROM, rec.POS, rec.REF)
+
+        for calls in utils.walk_together(self.dna_reader, *self.rna_readers,
+                                         vcf_record_sort_key=samerec):
             # select for heterozygous calls present in DNA and any one of the RNAs
             if calls[0] is not None and calls[0].samples[0].is_het and \
                     any(calls[1:]):
@@ -153,47 +157,6 @@ class Results(object):
                             gene
 
                 self.write_per_rna(gene, calls[0], calls[1:])
-                sys.stdout.flush()
-
-    def walk_vcfs(self, *readers):
-        # modified walk_vcfs from PyVCF that checks for record
-        # equality on chromosomal position and reference base only
-        # (and not variant call)
-
-        # if one of the VCFs has no records, StopIteration is
-        # raised immediately, so we need to check for that and
-        # deal appropriately
-        nexts = []
-        for reader in readers:
-            try:
-                nexts.append(reader.next())
-            except StopIteration:
-                nexts.append(None)
-
-        def samerec(rec1, rec2):
-            return (rec1.CHROM == rec2.CHROM and
-                    rec1.POS == rec2.POS and
-                    rec1.REF == rec2.REF)
-
-        while True:
-            min_next = min([x for x in nexts if x is not None])
-
-            # this line uses equality on Records, which checks the ALTs
-            # not sure what to do with records that have overlapping but different
-            # variation
-            yield [x if x is None or samerec(x, min_next) else None for x in nexts]
-
-            # update nexts that we just yielded
-            for i, n in enumerate(nexts):
-
-                if n is not None and samerec(n, min_next):
-                    try:
-                        nexts[i] = readers[i].next()
-                    except StopIteration:
-                        nexts[i] = None
-
-            if all([x is None for x in nexts]):
-                break
 
     def write_overlap(self, gene, dna_call, *rna_calls):
         dna_call = _build_dna_call(dna_call)
